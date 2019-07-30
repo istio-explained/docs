@@ -27,14 +27,12 @@ $ helm install --name appmsg ibm-charts/ibm-mqadvanced-server-dev \
   --set queueManager.dev.secret.adminPasswordKey=adminPassword \
   --set queueManager.dev.appPassword=ThisIsMyPassword \
   --set nameOverride=stmq --set service.type=NodePort --namespace stock-trader-mq
-``
+```
 
 ## Setup MQ
 
 ```
-
-# exec into MQ pod and set up
-```
+# exec into MQ pod
 $ kubectl exec -it appmsg-stmq-0 /bin/bash -n stock-trader-mq
 $ runmqsc
 DEFINE QLOCAL (NotificationQ)
@@ -45,14 +43,12 @@ end
 
 ## Validate MQ is up running, login using the admin pwd using user admin.
 
-
 ```
 # visit MQ service using NodePort, example:
 https://169.60.120.59:32460/ibmmq/console/login.html
 ```
 
 ## Consume this from stock-trader
-
 
 ```
 # create mq secret
