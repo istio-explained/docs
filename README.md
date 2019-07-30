@@ -1,8 +1,11 @@
-# Documentation for the voyager project
+# Documentation for the Voyager project
 
 ## Deploy the portfolio service:
 1. create required secret
-kubectl create secret generic jwt -n stock-trader --from-literal=audience=stock-trader --from-literal=issuer=http://stock-trader.ibm.com
+
+```
+$ kubectl create secret generic jwt -n stock-trader --from-literal=audience=stock-trader --from-literal=issuer=http://stock-trader.ibm.com
+```
 
 2. build the image
 
