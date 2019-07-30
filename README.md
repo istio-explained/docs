@@ -10,7 +10,7 @@ $ kubectl create secret generic jwt -n stock-trader --from-literal=audience=stoc
 2. build the image
 
 ```
-$ git clone https://github.com/kubernetes-in-the-enterprise/portfolio.git
+$ git clone https://github.com/thevoyagerproject/portfolio.git
 $ cd portfolio/manifests
 $ kubectl apply -f deploy.yaml -n stock-trader
 
