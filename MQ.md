@@ -1,11 +1,15 @@
 # Setup MQ
 
 ## Clone the repo
+```
+git clone https://github.com/thevoyagerproject/ch04.git
+cd ch04/mq
+```
 
 ## Deploy
 
 ```
-# deploy pod security requirement
+# deploy pod security policy
 $ kubectl apply -f ibm-mq-dev-psp.yaml 
 
 # deploy cluster role
