@@ -62,4 +62,17 @@ $ helm install --name stocktrader-db2 ibm-charts/ibm-db2oltp-dev \
 --set dataVolume.size=2Gi  --namespace=stock-trader-data
 ```
 
+4. Check DB2 services, statefulset and pod's readiness in stock-trader-data namespace.  Examples:
+```
+$ kubectl get all -n stock-trader-data
+NAME                               READY   STATUS    RESTARTS   AGE
+pod/stocktrade-ibm-db2oltp-dev-0   1/1     Running   0          35d
+
+NAME                                     TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                                   AGE
+service/stocktrade-ibm-db2oltp-dev       ClusterIP   None            <none>        50000/TCP,55000/TCP,60006/TCP,60007/TCP   35d
+service/stocktrade-ibm-db2oltp-dev-db2   NodePort    172.21.153.68   <none>        50000:30882/TCP,55000:30926/TCP           35d
+
+NAME                                          READY   AGE
+statefulset.apps/stocktrade-ibm-db2oltp-dev   1/1     35d
+```
 
