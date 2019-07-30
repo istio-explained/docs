@@ -12,10 +12,10 @@ cd ch04/mq
 ```
 $ kubectl create namespace stock-trader-mq
 
-# deploy pod security policy
+# deploy cluster-level pod security policy
 $ kubectl apply -f ibm-mq-dev-psp.yaml 
 
-# deploy cluster role
+# deploy cluster-level cluster role
 $ kubectl apply -f ibm-mq-dev-cr.yaml 
 
 # install MQ chart
@@ -26,7 +26,7 @@ $ helm install --name appmsg ibm-charts/ibm-mqadvanced-server-dev \
   --set queueManager.dev.secret.name=mq \
   --set queueManager.dev.secret.adminPasswordKey=adminPassword \
   --set queueManager.dev.appPassword=ThisIsMyPassword \
-  --set nameOverride=stmq --set service.type=NodePort --namespace stock-trader  
+  --set nameOverride=stmq --set service.type=NodePort --namespace stock-trader-mq
 ``
 
 ## Setup MQ
@@ -35,7 +35,7 @@ $ helm install --name appmsg ibm-charts/ibm-mqadvanced-server-dev \
 
 # exec into MQ pod and set up
 ```
-$ kubectl exec -it appmsg-stmq-0 /bin/bash -n stock-trader
+$ kubectl exec -it appmsg-stmq-0 /bin/bash -n stock-trader-mq
 $ runmqsc
 DEFINE QLOCAL (NotificationQ)
 SET AUTHREC PROFILE('NotificationQ') OBJTYPE(QUEUE) PRINCIPAL('app') AUTHADD(PUT,GET,INQ,BROWSE)
