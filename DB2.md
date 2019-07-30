@@ -78,7 +78,15 @@ statefulset.apps/stocktrade-ibm-db2oltp-dev   1/1     35d
 
 ## Populate DB2 table
 
-Edit ~/go/src/github.com/IBMStockTrader/stocktrader/scripts/variables.sh file:
+1. 
+```
+git clone stocktrader repo
+cd stocktrader/scripts
+```
+
+2. Edit variables.sh file with the updated value for ```DB2_PASSWORD```.
+
+```
 ###########################
 #  DB2-RELATED VARIABLES  #
 ###########################
@@ -98,7 +106,10 @@ DB2_NAMESPACE="stock-trader-data"
 # Database name that you created for the stocktrader application
 STOCKTRADER_DB="trader"
 
-~/go/src/github.com/IBMStockTrader/stocktrader/scripts
+```
+
+3. Execute the script to setup DB2 trader table.
+```
 $ ./setupDB2.sh
 Retrieving DB2 service name
 Retrieved DB2 service name: stocktrade-ibm-db2oltp-dev
@@ -121,6 +132,5 @@ DB20000I  The SQL command completed successfully.
 
 DB20000I  The SQL command completed successfully.
 
-
-(Think this is also run as part of setupDB2.sh)
 $ kubectl create secret generic db2 --from-literal=id=db2inst1 --from-literal=pwd=ThisIsMyPassword --from-literal=host=stocktrade-ibm-db2oltp-dev-db2.stock-trader-data.svc.cluster.local --from-literal=port=50000 --from-literal=db=trader -n stock-trader
+```
