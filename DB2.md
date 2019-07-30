@@ -76,3 +76,51 @@ NAME                                          READY   AGE
 statefulset.apps/stocktrade-ibm-db2oltp-dev   1/1     35d
 ```
 
+## Populate DB2 table
+
+Edit ~/go/src/github.com/IBMStockTrader/stocktrader/scripts/variables.sh file:
+###########################
+#  DB2-RELATED VARIABLES  #
+###########################
+
+# DB2 Helm chart version
+DB2_CHART_VERSION=""
+
+# DB2 user
+DB2_USER="db2inst1"
+
+# DB2 password.  The setup script attempts to find this value so set this only if the script is unable to do so.
+DB2_PASSWORD="ThisIsMyPassword"
+
+# DB2 Kubernetes namespace.  The setup script attempts to find this value so set this only if the script is unable to do so.
+DB2_NAMESPACE="stock-trader-data"
+
+# Database name that you created for the stocktrader application
+STOCKTRADER_DB="trader"
+
+~/go/src/github.com/IBMStockTrader/stocktrader/scripts
+$ ./setupDB2.sh
+Retrieving DB2 service name
+Retrieved DB2 service name: stocktrade-ibm-db2oltp-dev
+Creating Kubernetes secret for stocktrader to access DB2
+Error from server (AlreadyExists): secrets "db2" already exists
+Finding DB2 pod
+Sending ddl file to DB2 pod stocktrade-ibm-db2oltp-dev-0
+kubectl cp ./createStocktraderTables.ddl stock-trader-data/stocktrade-ibm-db2oltp-dev-0:createStocktraderTables.ddl
+kubectl exec -it stocktrade-ibm-db2oltp-dev-0 -n stock-trader-data -- chmod 644 /createStocktraderTables.ddl
+Creating DB2 tables
+kubectl exec -it stocktrade-ibm-db2oltp-dev-0 -n stock-trader-data -- su - -c db2 connect to trader && db2 -tf /createStocktraderTables.ddl db2inst1
+
+   Database Connection Information
+
+ Database server        = DB2/LINUXX8664 11.1.4.4
+ SQL authorization ID   = DB2INST1
+ Local database alias   = TRADER
+
+DB20000I  The SQL command completed successfully.
+
+DB20000I  The SQL command completed successfully.
+
+
+(Think this is also run as part of setupDB2.sh)
+$ kubectl create secret generic db2 --from-literal=id=db2inst1 --from-literal=pwd=ThisIsMyPassword --from-literal=host=stocktrade-ibm-db2oltp-dev-db2.stock-trader-data.svc.cluster.local --from-literal=port=50000 --from-literal=db=trader -n stock-trader
