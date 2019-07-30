@@ -9,6 +9,8 @@ cd ch04/mq
 ## Deploy
 
 ```
+$ kubectl create namespace stock-trader-mq
+
 # deploy pod security policy
 $ kubectl apply -f ibm-mq-dev-psp.yaml 
 
