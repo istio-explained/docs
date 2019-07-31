@@ -7,7 +7,7 @@ git clone https://github.com/thevoyagerproject/ch04.git
 cd ch04/mq
 ```
 
-## Deploy
+## Preparation
 
 ```
 $ kubectl create namespace stock-trader-mq
@@ -18,6 +18,12 @@ $ kubectl apply -f ibm-mq-dev-psp.yaml 
 # deploy cluster-level cluster role
 $ kubectl apply -f ibm-mq-dev-cr.yaml 
 
+$ kubectl create secret generic mq --from-literal=id=app --from-literal=pwd=mqpassword --from-literal=adminPassword=mqpw4me -n stock-trader-mq
+```
+
+## Deploy
+
+```
 # install MQ chart
 $ helm install --name appmsg ibm-charts/ibm-mqadvanced-server-dev \
   --set license=accept \
