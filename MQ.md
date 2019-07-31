@@ -66,7 +66,7 @@ Visit MQ service using NodePort, example: ```https://169.1.1.1:30356/ibmmq/conso
 Set MQ_ADMIN_PASSWORD:
 
 ```
-MQ_ADMIN_PASSWORD=$(kubectl get secret --namespace stock-trader-mq mq -o jsonpath="{.data.adminPassword}" | base64 --decode; echo)
+export MQ_ADMIN_PASSWORD=$(kubectl get secret --namespace stock-trader-mq mq -o jsonpath="{.data.adminPassword}" | base64 --decode; echo)
 ```
 ## Create the secret so that stock trader app can use MQ
 
