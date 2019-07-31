@@ -63,9 +63,17 @@ appmsg-stmq-metrics   ClusterIP   172.21.97.221   <none>        9157/TCP
 
 Visit MQ service using NodePort, example: ```https://169.1.1.1:30356/ibmmq/console/login.html```.
 
-## Consume this from stock-trader
+Set MQ_ADMIN_PASSWORD:
 
 ```
-# create mq secret
-$ kubectl create secret generic mq --from-literal=id=app --from-literal=pwd=mqpassword --from-literal=adminPassword=mqpassword -n stock-trader
+MQ_ADMIN_PASSWORD=$(kubectl get secret --namespace stock-trader-mq mq -o jsonpath="{.data.adminPassword}" | base64 --decode; echo)
+```
+## Create the secret so that stock trader app can use MQ
+
+```
+$ kubectl create secret generic mq --from-literal=id=app \
+--from-literal=pwd=$MQ_ADMIN_PASSWORD --from-literal=host=appmsg-stmq  \
+--from-literal=port=1414   --from-literal=channel=DEV.APP.SVRCONN \
+--from-literal=queue-manager=STQMGR  --from-literal=queue=NotificationQ -n stock-trader
+
 ```
