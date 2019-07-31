@@ -11,7 +11,7 @@
 $ kubectl create secret generic jwt -n stock-trader --from-literal=audience=stock-trader --from-literal=issuer=http://stock-trader.ibm.com
 ```
 
-2. build the image
+2. deploy
 
 ```
 $ git clone https://github.com/thevoyagerproject/portfolio.git
