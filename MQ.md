@@ -18,7 +18,7 @@ $ kubectl apply -f ibm-mq-dev-psp.yaml 
 # deploy cluster-level cluster role
 $ kubectl apply -f ibm-mq-dev-cr.yaml 
 
-$ kubectl create secret generic mq --from-literal=id=app --from-literal=pwd=mqpassword --from-literal=adminPassword=mqpw4me -n stock-trader-mq
+$ kubectl create secret generic mq --from-literal=id=app --from-literal=pwd=mqpassword --from-literal=adminPassword=mqpassword -n stock-trader-mq
 ```
 
 ## Deploy
@@ -67,5 +67,5 @@ Visit MQ service using NodePort, example: ```https://169.1.1.1:30356/ibmmq/conso
 
 ```
 # create mq secret
-$ kubectl create secret generic mq --from-literal=id=app --from-literal=pwd=mqpw4me --from-literal=adminPassword=<pwd> -n stock-trader
+$ kubectl create secret generic mq --from-literal=id=app --from-literal=pwd=mqpassword --from-literal=adminPassword=mqpassword -n stock-trader
 ```
