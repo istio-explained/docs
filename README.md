@@ -45,3 +45,5 @@ $ git clone https://github.com/thevoyagerproject/loyalty-level.git
 $ kubectl apply -f loyalty-level/manifests/deploy.yaml -n stock-trader
 ```
 
+## Visit the trader application:
+To visit the trader-service via NodePort, find the worker public ip and visit ```https://$WORKER_PUBLIC_IP:32389/trader/``` and login using stock/trader.
