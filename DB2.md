@@ -132,5 +132,6 @@ DB20000I  The SQL command completed successfully.
 
 DB20000I  The SQL command completed successfully.
 
+# optional step, should be already created as part of setupDB2.sh
 $ kubectl create secret generic db2 --from-literal=id=db2inst1 --from-literal=pwd=ThisIsMyPassword --from-literal=host=stocktrade-ibm-db2oltp-dev-db2.stock-trader-data.svc.cluster.local --from-literal=port=50000 --from-literal=db=trader -n stock-trader
 ```
