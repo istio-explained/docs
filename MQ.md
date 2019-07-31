@@ -51,10 +51,17 @@ $ exit
 
 ## Validate MQ is up running, login using the admin pwd using user admin.
 
+The MQ service is exposed using service type NodePort by default.  You can find out the port number that port 9443 maps to.   Example:
+
 ```
-# visit MQ service using NodePort, example:
-https://169.60.120.59:32460/ibmmq/console/login.html
+$ kubectl get services -n stock-trader-mq
+NAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
+appmsg-stmq           NodePort    172.21.70.53    <none>        9443:30356/TCP,1414:31181/TCP   2m38s
+appmsg-stmq-metrics   ClusterIP   172.21.97.221   <none>        9157/TCP
+
 ```
+
+Visit MQ service using NodePort, example: ```https://169.1.1.1:30356/ibmmq/console/login.html```.
 
 ## Consume this from stock-trader
 
