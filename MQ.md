@@ -45,6 +45,8 @@ DEFINE QLOCAL (NotificationQ)
 SET AUTHREC PROFILE('NotificationQ') OBJTYPE(QUEUE) PRINCIPAL('app') AUTHADD(PUT,GET,INQ,BROWSE)
 end
 
+# exit out of the MQ pod
+$ exit
 ```
 
 ## Validate MQ is up running, login using the admin pwd using user admin.
