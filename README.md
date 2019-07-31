@@ -15,8 +15,7 @@ $ kubectl create secret generic jwt -n stock-trader --from-literal=audience=stoc
 
 ```
 $ git clone https://github.com/thevoyagerproject/portfolio.git
-$ cd portfolio/manifests
-$ kubectl apply -f deploy.yaml -n stock-trader
+$ kubectl apply -f portfolio/manifests/deploy.yaml -n stock-trader
 
 # validate pod has reached running status
 $ kubectl get pods -n stock-trader
@@ -29,8 +28,7 @@ $ kubectl logs -c portfolio --namespace=stock-trader --selector="app=portfolio,s
 
 ```
 $ git clone https://github.com/thevoyagerproject/trader.git
-$ cd trader/manifests
-$ kubectl apply -f deploy.yaml -n stock-trader
+$ kubectl apply -f trader/manifests/deploy.yaml -n stock-trader
 ```
 
 ## Deploy the stock-quote service:
