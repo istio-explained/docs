@@ -16,7 +16,7 @@ $ git clone https://github.com/thevoyagerproject/portfolio.git
 $ kubectl apply -f portfolio/manifests/deploy.yaml -n stock-trader
 
 # validate pod has reached running status
-$ kubectl get pods -n stock-trader
+$ kubectl get pods -l app=portfolio -n stock-trader
 
 # view logs to validate no errors
 $ kubectl logs -c portfolio --namespace=stock-trader --selector="app=portfolio,solution=stock-trader"
