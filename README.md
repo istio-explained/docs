@@ -2,8 +2,6 @@
 
 ## [Deploy the DB2 service](DB2.md)
 
-## [Deploy the MQ service](MQ.md)
-
 ## Deploy the portfolio service:
 1. create required secret
 
