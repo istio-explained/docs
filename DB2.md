@@ -78,7 +78,7 @@ statefulset.apps/stocktrade-ibm-db2oltp-dev   1/1     35d
 
 ## Populate DB2 table
 
-1. 
+1. Checkout the stocktrader project.
 ```
 git clone https://github.com/thevoyagerproject/stocktrader.git
 cd stocktrader/scripts
