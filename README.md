@@ -1,4 +1,4 @@
-# Documentation for the Voyager project
+# Documentation for the project
 
 ## [Deploy the DB2 service](DB2.md)
 
