@@ -62,7 +62,7 @@ $ helm install --name stocktrader-db2 ibm-charts/ibm-db2oltp-dev \
 --set dataVolume.size=2Gi  --namespace=stock-trader-data
 ```
 
-4. Check DB2 services, statefulset and pod's readiness in stock-trader-data namespace.  Examples:
+4. Check DB2 services, statefulset and pod's readiness in stock-trader-data namespace.  It could take quite a while for the stateful set to reach ready status. Examples:
 ```
 $ kubectl get all -n stock-trader-data
 NAME                               READY   STATUS    RESTARTS   AGE
