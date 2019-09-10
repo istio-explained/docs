@@ -31,7 +31,7 @@ subjects:
   namespace: kube-system
 EOF
 
-$ helm init --service-account tille
+$ helm init --service-account tiller
 ```
 
 3. Install the IBM DB2 helm chart.
