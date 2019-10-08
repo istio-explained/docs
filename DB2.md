@@ -80,7 +80,7 @@ statefulset.apps/stocktrade-ibm-db2oltp-dev   1/1     35d
 
 1. Checkout the stocktrader project.
 ```
-git clone https://github.com/thevoyagerproject/stocktrader.git
+git clone https://github.com/istio-explained/stocktrader.git
 cd stocktrader/scripts
 ```
 
