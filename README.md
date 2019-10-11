@@ -31,6 +31,17 @@ $ kubectl apply -f trader/manifests/deploy.yaml -n stock-trader
 
 ## Deploy the stock-quote service:
 
+The stock-quote service reaches out to [IEX Cloud](https://iexcloud.io/) to obtain stock prices.  
+
+Optional: If you want to use your own API token, you may [register](https://iexcloud.io/cloud-login#/register) with IEX Cloud.  After you register and [login to IEX cloud](https://iexcloud.io/cloud-login), you can view your API token.
+
+```
+# replace $YOUR_IEX_API_TOKEN with the valye of your API token
+kubectl create secret generic iex -n stock-trader --from-literal=iex-api-key=$YOUR_IEX_API_TOKEN
+```
+
+Deploy the stock-quote service.
+
 ```
 $ git clone https://github.com/thevoyagerproject/stock-quote.git
 $ kubectl apply -f stock-quote/manifests/deploy.yaml -n stock-trader
