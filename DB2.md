@@ -34,6 +34,11 @@ EOF
 $ helm init --service-account tiller
 ```
 
+Note: if you are using K8S 1.16 or later, use the following cmd instead to init your helm tiller.
+```
+$ helm init --service-account tiller --override spec.selector.matchLabels.'name'='tiller',spec.selector.matchLabels.'app'='helm' --output yaml | sed 's@apiVersion: extensions/v1beta1@apiVersion: apps/v1@' | kubectl apply -f -
+```
+
 3. Install the IBM DB2 helm chart.
 
 ```
