@@ -67,6 +67,20 @@ $ helm install --name stocktrader-db2 ibm-charts/ibm-db2oltp-dev \
 --set dataVolume.size=2Gi  --namespace=stock-trader-data
 ```
 
+*Note: if helm install failed, you can use helm template to genreate the yaml and deploy.*
+```
+$ helm template --name stocktrader-db2 ibm-db2oltp-dev \
+--set db2inst.instname=db2inst1 \
+--set db2inst.password=ThisIsMyPassword \
+--set options.databaseName=trader \
+--set persistence.useDynamicProvisioning=true \
+--set dataVolume.storageClassName=ibmc-block-gold \
+--set etcdVolume.storageClassName=ibmc-block-gold \
+--set dataVolume.size=2Gi  --namespace=stock-trader-data > db2-deploy.yaml
+
+$ kubectl apply -f db2-deploy.yaml -n stock-trader-data  
+```
+
 4. Check DB2 services, statefulset and pod's readiness in stock-trader-data namespace.  It could take quite a while for the stateful set to reach ready status. Examples:
 ```
 $ kubectl get all -n stock-trader-data
