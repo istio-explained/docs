@@ -67,7 +67,7 @@ $ helm install --name stocktrader-db2 ibm-charts/ibm-db2oltp-dev \
 --set dataVolume.size=2Gi  --namespace=stock-trader-data
 ```
 
-*Note: if helm install failed, you can use helm template to genreate the yaml and deploy.*
+*Note: if helm install failed, you can use helm template in the istio-explained/docs dir to genreate the yaml and deploy.*
 ```
 $ helm template --name stocktrader-db2 ibm-db2oltp-dev \
 --set db2inst.instname=db2inst1 \
