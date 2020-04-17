@@ -56,6 +56,9 @@ $ kubectl create secret docker-registry mydb2secret --docker-username=linsun --d
 # Update serviceaccount with correct secret
 $ kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "mydb2secret"}]}' --namespace=stock-trader-data
 
+# Add ibm-charts repository
+$ helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable/
+
 # install DB2.  Use ibmc-block-gold storage class for IKS
 $ helm install --name stocktrader-db2 ibm-charts/ibm-db2oltp-dev \
 --set db2inst.instname=db2inst1 \
