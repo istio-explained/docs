@@ -4,7 +4,7 @@
 
 1. Subscribe to [Db2 Developer-C Editon](https://hub.docker.com/_/db2-developer-c-edition) on Docker Store to access the DB2 Developer-C Edition image.
 
-2. Init Helm if needed.
+2. Init Helm v2 if needed.
 
 ```
 $ cat <<EOF | kubectl create -f -
@@ -38,7 +38,7 @@ Note: if you are using K8S 1.16 or later, use the following cmd instead to init 
 ```
 $ helm init --service-account tiller --override spec.selector.matchLabels.'name'='tiller',spec.selector.matchLabels.'app'='helm' --output yaml | sed 's@apiVersion: extensions/v1beta1@apiVersion: apps/v1@' | kubectl apply -f -
 ```
-
+3. Install [IBM Cloud Block Storage plug-in in your cluster](https://cloud.ibm.com/docs/containers?topic=containers-block_storage#install_block)
 3. Install the IBM DB2 helm chart.
 
 ```
