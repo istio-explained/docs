@@ -6,6 +6,7 @@
 1. create required secret
 
 ```
+$ kubectl create namespace stock-trader
 $ kubectl create secret generic jwt -n stock-trader --from-literal=audience=stock-trader --from-literal=issuer=http://stock-trader.ibm.com
 ```
 
