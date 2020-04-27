@@ -42,8 +42,9 @@ $ helm init --service-account tiller --override spec.selector.matchLabels.'name'
 3. Install the IBM DB2 helm chart.
 
 ```
-# create the stock-trader-data namespace
+# create the stock-trader-data and stock-trader namespace
 $ kubectl create namespace stock-trader-data
+$ kubectl create namespace stock-trader
 
 # clone the repo
 $ git clone https://github.com/IBM/charts
@@ -97,6 +98,8 @@ service/stocktrade-ibm-db2oltp-dev-db2   NodePort    172.21.153.68   <none>     
 NAME                                          READY   AGE
 statefulset.apps/stocktrade-ibm-db2oltp-dev   1/1     35d
 ```
+
+Check for `SQL1063N  DB2START processing was successful.` message in `kubectl logs -l app=stocktrade-ibm-db2oltp-dev -n stock-trader-data` before continuing to the next step. This might take several minutes.
 
 ## Populate DB2 table
 
