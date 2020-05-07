@@ -4,7 +4,7 @@
 
 1. Subscribe to [Db2 Developer-C Editon](https://hub.docker.com/_/db2-developer-c-edition) on Docker Store to access the DB2 Developer-C Edition image.
 
-2. Init Helm if needed.
+2. Init Helm v2 if needed.
 
 ```
 $ cat <<EOF | kubectl create -f -
@@ -38,12 +38,13 @@ Note: if you are using K8S 1.16 or later, use the following cmd instead to init 
 ```
 $ helm init --service-account tiller --override spec.selector.matchLabels.'name'='tiller',spec.selector.matchLabels.'app'='helm' --output yaml | sed 's@apiVersion: extensions/v1beta1@apiVersion: apps/v1@' | kubectl apply -f -
 ```
-
+3. Install [IBM Cloud Block Storage plug-in in your cluster](https://cloud.ibm.com/docs/containers?topic=containers-block_storage#install_block)
 3. Install the IBM DB2 helm chart.
 
 ```
-# create the stock-trader-data namespace
+# create the stock-trader-data and stock-trader namespace
 $ kubectl create namespace stock-trader-data
+$ kubectl create namespace stock-trader
 
 # clone the repo
 $ git clone https://github.com/IBM/charts
@@ -55,6 +56,9 @@ $ kubectl create secret docker-registry mydb2secret --docker-username=linsun --d
 
 # Update serviceaccount with correct secret
 $ kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "mydb2secret"}]}' --namespace=stock-trader-data
+
+# Add ibm-charts repository
+$ helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable/
 
 # install DB2.  Use ibmc-block-gold storage class for IKS
 $ helm install --name stocktrader-db2 ibm-charts/ibm-db2oltp-dev \
@@ -94,6 +98,8 @@ service/stocktrade-ibm-db2oltp-dev-db2   NodePort    172.21.153.68   <none>     
 NAME                                          READY   AGE
 statefulset.apps/stocktrade-ibm-db2oltp-dev   1/1     35d
 ```
+
+Check for `SQL1063N  DB2START processing was successful.` message in `kubectl logs -l app=stocktrade-ibm-db2oltp-dev -n stock-trader-data` before continuing to the next step. This might take several minutes.
 
 ## Populate DB2 table
 
